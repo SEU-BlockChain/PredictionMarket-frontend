@@ -1,6 +1,6 @@
-let cos_url = "https://sc-1304907527.cos.ap-nanjing.myqcloud.com/"
-// let api_url = "https://api.chain.seutools.com/"
-let api_url = "http://127.0.0.1:8000/"
+let cos_url = "https://bc-1304907527.cos.ap-nanjing.myqcloud.com/"
+let api_url = "https://api.chain.seutools.com/"
+// let api_url = "http://127.0.0.1:8000/"
 
 
 let re_pattens = {

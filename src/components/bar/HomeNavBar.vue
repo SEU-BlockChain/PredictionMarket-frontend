@@ -3,13 +3,13 @@
 
     <div id="left">
       <img id="logo" @click="this.$router.replace('/home')"
-           src="https://sc-1304907527.cos.ap-nanjing.myqcloud.com/static/logo128.png" alt="">
+           :src="this.$settings.cos_url+'static/logo128.png'" alt="">
     </div>
 
     <var-divider class="divider" vertical/>
 
-    <div id="center" @click="this.$router.replace('/home')">
-      <div id="name">
+    <div id="center">
+      <div id="name" @click="this.$router.replace('/home')">
         预测市场
       </div>
 
@@ -20,9 +20,10 @@
           inactive-color="#333"
           active-color="#4ebaee"
           indicator-color="#4ebaee">
-          <var-tab class="tab" :class="{'tab-active':active===0}" @click="this.$router.replace('/home')">首页</var-tab>
+          <var-tab class="tab" :class="{'tab-active':active===0}" @click="this.$router.replace('/home/')">首页</var-tab>
           <var-tab class="tab" :class="{'tab-active':active===1}">话题</var-tab>
-          <var-tab class="tab" :class="{'tab-active':active===2}">论坛</var-tab>
+          <var-tab class="tab" :class="{'tab-active':active===2}" @click="this.$router.replace('/home/bbs')">论坛
+          </var-tab>
           <var-tab class="tab" :class="{'tab-active':active===3}">数据</var-tab>
           <var-tab class="tab" :class="{'tab-active':active===4}">关于</var-tab>
         </var-tabs>
@@ -111,12 +112,19 @@
   export default {
     name: "HomeNavBar",
     components: {},
-    props: {
-      active: Number,
+    watch: {
+      "$route"() {
+        let path = window.location.pathname
+        this.active=this.data[path]
+      },
     },
     data() {
       return {
-        value: ""
+        value: "",
+        active: 0,
+        data: {
+          "/home/bbs": 2
+        }
       }
     },
     computed: {
@@ -131,6 +139,10 @@
           this.$router.push("/user/login?next=/home")
         }
       }
+    },
+    created() {
+      let path = window.location.pathname
+      this.active=this.data[path]
     }
   }
 </script>

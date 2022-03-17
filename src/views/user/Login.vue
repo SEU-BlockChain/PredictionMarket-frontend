@@ -14,7 +14,7 @@
   </var-app-bar>
 
   <div id="wrap">
-    <var-image id="logo" src="https://sc-1304907527.cos.ap-nanjing.myqcloud.com/static/logo256.png"/>
+    <var-image id="logo" :src="this.$settings.cos_url+'static/logo256.png'"/>
     <var-divider>
       <div id="title">{{is_to_login? "登录":"注册"}}</div>
     </var-divider>

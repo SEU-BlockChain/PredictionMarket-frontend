@@ -1,7 +1,7 @@
 <template>
   <div id="wrap">
     <var-image width="200px" style="margin: 0 auto"
-               src=" https://sc-1304907527.cos.ap-nanjing.myqcloud.com/static/404.png"/>
+               :src=" this.$settings.cos_url+'static/404.png'"/>
     <div id="text">页面不见了...</div>
     <div id="link">
       <router-link replace="true" to="/home">返回首页</router-link>

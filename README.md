@@ -18,7 +18,7 @@ npm run build
 ### Deploy
 ```
 cd dist
-tcb hosting deploy -r sh -e silicom-3g1n80lk04073434
+tcb hosting deploy -r sh -e blockchain-4ggptbjef6717b9b
 ```
 
 ### Customize configuration

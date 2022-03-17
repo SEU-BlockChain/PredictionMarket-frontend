@@ -14,7 +14,7 @@
   </var-app-bar>
 
   <div id="wrap">
-    <var-image id="logo" src="https://sc-1304907527.cos.ap-nanjing.myqcloud.com/static/logo256.png"/>
+    <var-image id="logo" :src="this.$settings.cos_url+'static/logo256.png'"/>
 
     <div id="step-wrap">
       <var-steps :active="active">

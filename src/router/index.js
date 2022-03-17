@@ -10,11 +10,18 @@ const routes = [
     component: HomeWrap,
     children: [
       {
-        path: "/",
+        path: "",
         meta: {
           title: "首页",
         },
         component: HomePage,
+      },
+      {
+        path: "/home/bbs",
+        meta: {
+          title: "论坛",
+        },
+        component:  () => import("views/home/BBS"),
       },
       {
         path: "/home/404",
