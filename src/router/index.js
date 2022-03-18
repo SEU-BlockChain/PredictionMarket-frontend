@@ -3,10 +3,8 @@ import HomeWrap from "views/home/HomeWrap";
 import HomePage from "views/home/HomePage";
 
 const routes = [
-  {path: "", redirect: "/home",},
-
   {
-    path: "/home",
+    path: "",
     component: HomeWrap,
     children: [
       {
@@ -17,14 +15,28 @@ const routes = [
         component: HomePage,
       },
       {
-        path: "/home/bbs",
+        path: "/bbs",
         meta: {
           title: "论坛",
         },
-        component:  () => import("views/home/BBS"),
+        component: () => import("views/home/BBS"),
       },
       {
-        path: "/home/404",
+        path: "/bbs/post-article",
+        meta: {
+          title: "发布帖子",
+        },
+        component: () => import("views/home/BBS/PostArticle"),
+      },
+      {
+        path: "/bbs/article/:id",
+        meta: {
+          title: "帖子详情",
+        },
+        component: () => import("views/home/BBS/Article"),
+      },
+      {
+        path: "/404",
         meta: {
           title: "页面不见了",
         },
@@ -104,7 +116,7 @@ const routes = [
     ]
   },
 
-  {path: '/:pathMatch(.*)', redirect: "/home/404"}
+  {path: '/:pathMatch(.*)', redirect: "/404"}
 ]
 
 const router = createRouter({

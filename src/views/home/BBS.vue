@@ -11,6 +11,7 @@
             :finished="finished"
             v-model:loading="loading"
             @load="load"
+            :offset="200"
           >
             <div :key="item" v-for="item in article_list">
               <article-card :article="item"/>
@@ -24,7 +25,13 @@
   <div id="body-right">
     <var-card id="right-card" class="card" elevation="0">>
       <template #extra>
-        123
+        <div id="card-btn-wrap">
+          <div class="card-btn" @click="this.$router.push('/bbs/post-article')">
+            <var-icon class="icon" size="20" name="plus"/>
+            <span>发布帖子</span>
+            <var-icon class="icon" style="float: right" size="20" name="chevron-right"/>
+          </div>
+        </div>
       </template>
     </var-card>
   </div>
@@ -51,7 +58,7 @@
     methods: {
       load() {
         this.$ajax.api.get(
-          "bbs/article/" || this.next,
+          this.next || "bbs/article/",
         ).then(res => {
           if (res.data.code === 112) {
             for (let i of res.data.result.results) {
@@ -93,6 +100,7 @@
       width: 68%;
       margin-right: 2%;
       float: left;
+      margin-bottom: 200px;
     }
 
     #body-right {
@@ -104,5 +112,25 @@
       margin: 10px;
     }
 
+    #card-btn-wrap {
+      width: 70%;
+      margin: 30px auto;
+
+    }
+
+    .card-btn {
+      width: 100%;
+      line-height: 40px;
+      font-size: 15px;
+      font-weight: bolder;
+      border-radius: 5px;
+      background-color: #ffe14c;
+      cursor: pointer;
+    }
+
+    .icon {
+      margin: 10px;
+      cursor: pointer;
+    }
   }
 </style>

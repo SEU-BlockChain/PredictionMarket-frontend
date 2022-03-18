@@ -1,16 +1,44 @@
 <template>
-  <div id="content">
+  <div id="wrap">
+
     <div class="clear-fix">
       <img id="avatar" :src="this.$settings.cos_url+article.author.icon"/>
       <div id="author">{{article.author.username}}</div>
+      <var-chip id="level" :round="false" type="warning" size="mini">
+        Lv.{{this.$settings.rank(article.author.experience).level}}
+      </var-chip>
+      <div id="time">{{this.$settings.filters.date(article.update_time)}}</div>
     </div>
-    <div>{{article}}</div>
+
+    <div id="title" @click="this.$router.push(`/bbs/article/${article.id}`)">
+      {{article.title}}
+    </div>
+
+    <div id="content" class="limited-xy" v-html="article.description"
+         @click="this.$router.push(`/bbs/article/${article.id}`)"></div>
+
+    <div class="clear-fix">
+      <var-chip size="small" id="category">{{article.category.category}}</var-chip>
+
+      <div class="text">{{article.comment_num}}</div>
+      <img class="icon" src="~assets/img/comment.svg" height="20" alt="">
+
+      <div class="text">{{article.up_num}}</div>
+      <img class="icon" src="~assets/img/up.svg" height="20" alt="">
+
+      <div class="text">{{article.view_num}}</div>
+      <img class="icon" src="~assets/img/view.svg" height="20" alt="">
+    </div>
+    <var-divider/>
   </div>
 </template>
 
 <script>
+  import Level from "../chip/Level";
+
   export default {
     name: "ArticleCard",
+    components: {Level},
     props: {
       article: Object
     }
@@ -19,7 +47,7 @@
 
 <style scoped>
   @media screen and (min-width: 840px) {
-    #content {
+    #wrap {
       margin: 20px;
     }
 
@@ -28,14 +56,70 @@
       height: 30px;
       border-radius: 50%;
       float: left;
+      cursor: pointer;
     }
 
-    #author{
+    #author {
       line-height: 30px;
       margin: 0 5px;
       font-size: 14px;
       color: #666;
       float: left;
+      cursor: pointer;
     }
+
+    #level {
+      margin-top: 7px;
+      float: left;
+      cursor: pointer;
+    }
+
+    #title {
+      font-size: 20px;
+      line-height: 40px;
+      font-weight: 600;
+      color: #333;
+      cursor: pointer;
+    }
+
+    #content {
+      margin: 10px 0;
+      min-height: 60px;
+      cursor: pointer;
+    }
+
+    #time {
+      float: left;
+      line-height: 30px;
+      font-size: 14px;
+      margin-left: 10px;
+      color: #999999;
+    }
+
+    #category {
+      float: left;
+      cursor: pointer;
+      margin: 3px;
+      background-color: #f5f5f5;
+    }
+
+    .icon {
+      float: right;
+      margin: 5px;
+    }
+
+    .text {
+      line-height: 30px;
+      float: right;
+      min-width: 50px;
+    }
+
+    #title:hover, #category:hover {
+      cursor: pointer;
+      color: #4ebaee;
+    }
+
   }
+
+
 </style>

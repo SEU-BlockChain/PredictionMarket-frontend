@@ -6,7 +6,7 @@
   export default {
     name: "Level",
     props: {
-      level: null
+      level: null,
     }
   }
 </script>

@@ -2,15 +2,15 @@
   <div id="nav-bar" class="clear-fix var-elevation--5">
 
     <div id="left">
-      <img id="logo" @click="this.$router.replace('/home')"
+      <img id="logo" @click="this.$router.replace('/')"
            :src="this.$settings.cos_url+'static/logo128.png'" alt="">
     </div>
 
     <var-divider class="divider" vertical/>
 
     <div id="center">
-      <div id="name" @click="this.$router.replace('/home')">
-        预测市场
+      <div id="name" @click="this.$router.replace('/')">
+        111111111
       </div>
 
       <div id="option">
@@ -20,9 +20,9 @@
           inactive-color="#333"
           active-color="#4ebaee"
           indicator-color="#4ebaee">
-          <var-tab class="tab" :class="{'tab-active':active===0}" @click="this.$router.replace('/home/')">首页</var-tab>
+          <var-tab class="tab" :class="{'tab-active':active===0}" @click="this.$router.replace('/')">首页</var-tab>
           <var-tab class="tab" :class="{'tab-active':active===1}">话题</var-tab>
-          <var-tab class="tab" :class="{'tab-active':active===2}" @click="this.$router.replace('/home/bbs')">论坛
+          <var-tab class="tab" :class="{'tab-active':active===2}" @click="this.$router.replace('/bbs')">论坛
           </var-tab>
           <var-tab class="tab" :class="{'tab-active':active===3}">数据</var-tab>
           <var-tab class="tab" :class="{'tab-active':active===4}">关于</var-tab>
@@ -123,7 +123,7 @@
         value: "",
         active: 0,
         data: {
-          "/home/bbs": 2
+          "/bbs": 2
         }
       }
     },
