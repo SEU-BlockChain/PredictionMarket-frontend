@@ -65,7 +65,8 @@
               this.article_list.push(i)
             }
             this.loading = false
-            this.next = res.data.result.next
+            if (res.data.result.next)
+              this.next = res.data.result.next.match(/(\/bbs\/article\/.*)/)[0]
             this.finished = !Boolean(res.data.result.next)
           } else {
             this.$tip({

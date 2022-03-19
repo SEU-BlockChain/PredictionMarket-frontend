@@ -46,6 +46,8 @@
 
           <div id="submit" class="clear-fix">
             <var-button id="post" type="success" @click="post">发布</var-button>
+            <var-button id="save" type="info">保持草稿</var-button>
+            <var-button id="back" type="warning" @click="this.$router.return('/bbs')">取消</var-button>
           </div>
         </div>
       </template>
@@ -194,7 +196,7 @@
               type: "success",
               duration: 1000,
             })
-            console.log(res.data)
+            this.$router.replace(`/bbs/article/${res.data.result.id}`)
           } else {
             this.$tip({
               content: res.data.msg,
@@ -254,8 +256,9 @@
       z-index: 1500;
     }
 
-    #post {
+    #post, #save, #back {
       float: right;
+      margin-right: 20px;
     }
   }
 </style>

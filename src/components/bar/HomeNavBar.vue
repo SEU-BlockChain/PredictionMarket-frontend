@@ -71,7 +71,7 @@
   </div>
 
   <div id="pe-nav-bar">
-    <var-app-bar title="预测市场" text-color="#333" color="#f6f6f6" title-position="center" :elevation="false">
+    <var-app-bar title="1111" text-color="#333" color="#f6f6f6" title-position="center" :elevation="false">
       <template #left>
         <var-image
           id="pc-avatar"
@@ -114,17 +114,24 @@
     components: {},
     watch: {
       "$route"() {
-        let path = window.location.pathname
-        this.active=this.data[path]
+        for (let i of this.data) {
+          if (window.location.pathname.includes(i.path)) {
+            this.active = i.active
+            break
+          }
+        }
       },
     },
     data() {
       return {
         value: "",
         active: 0,
-        data: {
-          "/bbs": 2
-        }
+        data: [
+          {
+            path: "/bbs",
+            active: 2
+          }
+        ]
       }
     },
     computed: {
@@ -141,13 +148,53 @@
       }
     },
     created() {
-      let path = window.location.pathname
-      this.active=this.data[path]
+      for (let i of this.data) {
+        if (window.location.pathname.includes(i.path)) {
+          this.active = i.active
+          break
+        }
+      }
     }
   }
 </script>
 
 <style scoped>
+  @media screen and (min-width: 1250px) {
+    #left {
+      width: calc(20% - 1px);
+    }
+
+    #center {
+      width: 60%;
+      min-width: 750px;
+      text-align: center;
+    }
+
+
+  }
+
+  @media screen and (max-width: 1250px) and (min-width: 930px) {
+    #left {
+      width: calc(50% - 376px);
+    }
+
+    #center {
+      width: 750px;;
+      text-align: center;
+    }
+
+  }
+  @media screen and (max-width: 930px) and (min-width: 840px) {
+    #left {
+      width: calc(50% - 326px);
+    }
+
+    #center {
+      width: 650px;;
+      text-align: center;
+    }
+
+  }
   @media screen and (min-width: 840px) {
     #pe-nav-bar {
       display: none;
@@ -170,18 +217,6 @@
       display: inline-block;
     }
 
-    #left {
-      width: 22%;
-    }
-
-    #center {
-      width: calc(56% - 2px);
-      text-align: center;
-    }
-
-    #right {
-      width: 22%;
-    }
 
     .divider {
       margin: 20px 0;

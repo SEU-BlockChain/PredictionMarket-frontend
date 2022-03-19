@@ -25,6 +25,7 @@ const routes = [
         path: "/bbs/post-article",
         meta: {
           title: "发布帖子",
+          auth: true,
         },
         component: () => import("views/home/BBS/PostArticle"),
       },
@@ -142,5 +143,6 @@ router.beforeEach((to, from, next) => {
 router.return = function (path) {
   return (!window.history.state.back && path) ? router.replace(path) : router.back()
 }
+
 
 export default router

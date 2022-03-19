@@ -19,7 +19,8 @@
 <style scoped>
   @media screen and (min-width: 840px) {
     #content {
-      width: 56%;
+      width: 60%;
+      min-width: 750px;
       margin: 0 auto;
       padding: 64px 0;
       min-height: 120vh;
