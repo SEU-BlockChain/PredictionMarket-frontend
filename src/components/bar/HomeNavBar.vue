@@ -143,7 +143,7 @@
         if (this.$store.state.is_login) {
           this.$router.push("/user/")
         } else {
-          this.$router.push("/user/login?next=/home")
+          this.$router.push("/user/login?next=/")
         }
       }
     },
@@ -184,6 +184,7 @@
     }
 
   }
+
   @media screen and (max-width: 930px) and (min-width: 840px) {
     #left {
       width: calc(50% - 326px);
@@ -195,6 +196,7 @@
     }
 
   }
+
   @media screen and (min-width: 840px) {
     #pe-nav-bar {
       display: none;

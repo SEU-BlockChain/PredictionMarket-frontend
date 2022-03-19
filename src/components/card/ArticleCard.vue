@@ -23,8 +23,8 @@
       <div class="text">{{article.comment_num}}</div>
       <img class="icon" src="~assets/img/comment.svg" height="20" alt="">
 
-      <div class="text">{{article.up_num}}</div>
-      <img class="icon" src="~assets/img/up.svg" height="20" alt="">
+      <div class="text" :class="{upActive1:article.is_up===true}">{{article.up_num}}</div>
+      <img class="icon" :class="{upActive:article.is_up===true}" src="~assets/img/up.svg" height="20" alt="">
 
       <div class="text">{{article.view_num}}</div>
       <img class="icon" src="~assets/img/view.svg" height="20" alt="">
@@ -41,7 +41,8 @@
     components: {Level},
     props: {
       article: Object
-    }
+    },
+
   }
 </script>
 
@@ -103,15 +104,30 @@
       background-color: #f5f5f5;
     }
 
+    .upActive {
+      filter: drop-shadow(-500px 0 #4ebaee) !important;
+    }
+
+    .upActive1 {
+      color: #4ebaee!important;
+    }
+
     .icon {
       float: right;
       margin: 5px;
+      overflow: hidden;
+      position: relative;
+      transform: translateX(500px);
+      filter: drop-shadow(-500px 0 #999);
+      border-left: 4px solid transparent;
+      border-right: 4px solid transparent;
     }
 
     .text {
       line-height: 30px;
       float: right;
       min-width: 50px;
+      color: #999;
     }
 
     #title:hover, #category:hover {

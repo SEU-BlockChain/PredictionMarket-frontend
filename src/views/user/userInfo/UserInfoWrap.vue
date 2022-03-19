@@ -229,7 +229,7 @@
           if (res === "confirm") {
             this.$cookies.remove("token")
             this.$store.commit("logout")
-            this.$router.replace("/home")
+            this.$router.replace("/")
           }
         })
       },

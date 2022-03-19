@@ -6,7 +6,7 @@
         text
         color="transparent"
         text-color="#ffffff"
-        @click="this.$router.return('/home')"
+        @click="this.$router.return('/')"
       >
         <var-icon name="chevron-left" :size="24"/>
       </var-button>

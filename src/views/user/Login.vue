@@ -135,7 +135,7 @@
           if (res.data.code === 103 && this.is_to_login || res.data.code === 102 && !this.is_to_login) {
             this.$cookies.set("token", res.data.result.token)
             this.$store.commit("login", res.data.result["user"])
-            this.$router.replace(this.$route.query.next || "/home")
+            this.$router.replace(this.$route.query.next || "")
           } else {
             this.$tip({
               content: res.data.msg,
@@ -170,7 +170,7 @@
     },
     created() {
       if (this.$store.state.is_login) {
-        this.$router.replace(this.$route.params.next || "/home")
+        this.$router.replace(this.$route.params.next || "/")
       }
     }
   }

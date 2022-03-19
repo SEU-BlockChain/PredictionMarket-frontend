@@ -124,6 +124,38 @@ let filters = {
 }
 
 
+let upAndDown = function (is_up, obj) {
+  if (!is_up) {
+    if (obj.is_up === null) {
+      obj.is_up = false
+      obj.down_num++
+    } else {
+      if (obj.is_up) {
+        obj.up_num--
+        obj.down_num++
+        obj.is_up = false
+      } else {
+        obj.down_num--
+        obj.is_up = null
+      }
+    }
+  } else {
+    if (obj.is_up === null) {
+      obj.is_up = true
+      obj.up_num++
+    } else {
+      if (obj.is_up) {
+        obj.up_num--
+        obj.is_up = null
+      } else {
+        obj.up_num++
+        obj.down_num--
+        obj.is_up = true
+      }
+    }
+  }
+}
+
 export {
   api_url
 }
@@ -135,5 +167,6 @@ export default {
   re_pattens,
   rank,
   DateParser,
-  filters
+  filters,
+  upAndDown
 }

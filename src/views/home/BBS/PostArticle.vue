@@ -46,7 +46,7 @@
 
           <div id="submit" class="clear-fix">
             <var-button id="post" type="success" @click="post">发布</var-button>
-            <var-button id="save" type="info">保持草稿</var-button>
+            <var-button id="save" type="info">保存草稿</var-button>
             <var-button id="back" type="warning" @click="this.$router.return('/bbs')">取消</var-button>
           </div>
         </div>
