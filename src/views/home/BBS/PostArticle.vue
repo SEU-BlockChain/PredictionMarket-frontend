@@ -5,8 +5,6 @@
       class="card"
     >
       <template #extra>
-        <var-divider/>
-
         <div id="body">
           <div id="title" class="clear-fix">
             <div id="title-text">标题:</div>
@@ -17,7 +15,7 @@
 
           <div id="content" class="clear-fix">
             <div id="content-text">文章内容:</div>
-            <div id="content-input">
+            <div id="content-input" style="z-index: 1200">
               <Toolbar
                 style="border-bottom: 1px solid #ccc"
                 editorId="editor"
@@ -25,7 +23,7 @@
                 :mode="mode"
               />
               <Editor
-                style="height:40vh; overflow-y: hidden;"
+                style="height:60vh; overflow-y: hidden;"
                 editorId="editor"
                 :defaultConfig="editorConfig"
                 :mode="mode"
@@ -90,13 +88,7 @@
             },
             "color",
             "bgColor",
-            "|",
-            "fontSize",
             "fontFamily",
-            "lineHeight",
-            "|",
-            "bulletedList",
-            "numberedList",
             "todo",
             {
               "key": "group-justify",
@@ -106,20 +98,8 @@
                 "justifyLeft",
                 "justifyRight",
                 "justifyCenter",
-                "justifyJustify"
               ]
             },
-            {
-              "key": "group-indent",
-              "title": "缩进",
-              "iconSvg": "<svg viewBox=\"0 0 1024 1024\"><path d=\"M0 64h1024v128H0z m384 192h640v128H384z m0 192h640v128H384z m0 192h640v128H384zM0 832h1024v128H0z m0-128V320l256 192z\"></path></svg>",
-              "menuKeys": [
-                "indent",
-                "delIndent"
-              ]
-            },
-            "|",
-            "emotion",
             "insertLink",
             {
               "key": "group-image",
@@ -130,14 +110,14 @@
                 "uploadImage"
               ]
             },
-            "insertTable",
             "divider",
-            "|",
             "undo",
             "redo",
+            "fullScreen"
           ]
         },
         editorConfig: {
+          autoFocus: false,
           placeholder: '请输入内容...',
           MENU_CONF: {
             insertImage: {
@@ -224,18 +204,6 @@
 
 <style scoped>
   @media screen and (min-width: 840px) {
-    #wrap {
-      margin-top: 30px;
-    }
-
-    #body {
-      margin: 50px;
-    }
-
-    #title, #content, #category {
-      margin: 30px 0;
-    }
-
     #title-text, #content-text, #category-text {
       width: 100px;
       line-height: 32px;
@@ -248,17 +216,46 @@
       float: left;
     }
 
+    #wrap {
+      margin-top: 30px;
+    }
+
+    #body {
+      margin: 50px;
+    }
+
     #content-input {
       border: 1px solid #ccc
     }
 
-    #category-input {
-      z-index: 1500;
+    #title, #content, #category {
+      margin: 30px 0;
+    }
+  }
+
+  @media screen and (max-width: 840px) {
+    #content-input {
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
     }
 
-    #post, #save, #back {
-      float: right;
-      margin-right: 20px;
+    #title, #category {
+      margin: 10px;
     }
+
+
+    #title-text, #content-text {
+      display: none;
+    }
+  }
+
+
+  #category-input {
+    z-index: 1500;
+  }
+
+  #post, #save, #back {
+    float: right;
+    margin:0 20px 20px 0;
   }
 </style>

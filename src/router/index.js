@@ -18,6 +18,7 @@ const routes = [
         path: "/bbs",
         meta: {
           title: "论坛",
+          keepAlive: true
         },
         component: () => import("views/home/BBS"),
       },

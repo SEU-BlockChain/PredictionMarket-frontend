@@ -36,6 +36,9 @@
     </var-card>
   </div>
 
+  <var-button id="post-article" type="success" round @click="this.$router.push('/bbs/post-article')">
+    <var-icon size="28" name="plus"/>
+  </var-button>
 </template>
 
 <script>
@@ -90,6 +93,10 @@
 
 <style scoped>
   @media screen and (min-width: 840px) {
+    #post-article {
+      display: none;
+    }
+
     #head {
       background-color: #ccc;
       margin: 20px 0;
@@ -132,6 +139,31 @@
     .icon {
       margin: 10px;
       cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 840px) {
+    #body-right {
+      display: none;
+    }
+
+    #post-article {
+      position: fixed;
+      right: 40px;
+      bottom: 120px;
+    }
+
+    #head {
+      background-color: #ccc;
+      margin: 5px;
+      width: calc(100% - 10px);
+      height: 150px;
+      border-radius: 5px;
+    }
+
+    #body-left {
+      width: 100%;
+      padding: 5px;
     }
   }
 </style>

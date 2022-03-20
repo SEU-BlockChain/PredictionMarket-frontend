@@ -99,9 +99,9 @@
       active-color="#4ebaee"
       indicator-color="#4ebaee"
       style="border-radius: 0">
-      <var-tab class="tab" :class="{'tab-active':active===0}">首页</var-tab>
+      <var-tab class="tab" :class="{'tab-active':active===0}" @click="this.$router.replace('/')">首页</var-tab>
       <var-tab class="tab" :class="{'tab-active':active===1}">话题</var-tab>
-      <var-tab class="tab" :class="{'tab-active':active===2}">论坛</var-tab>
+      <var-tab class="tab" :class="{'tab-active':active===2}" @click="this.$router.replace('/bbs')">论坛</var-tab>
       <var-tab class="tab" :class="{'tab-active':active===3}">数据</var-tab>
       <var-tab class="tab" :class="{'tab-active':active===4}">关于</var-tab>
     </var-tabs>

@@ -49,44 +49,41 @@
 </script>
 
 <style scoped>
-  @media screen and (min-width: 840px) {
-    .interact-wrap {
-      float: right;
-      margin: 0 10px;
-    }
 
-    .icon {
-      overflow: hidden;
-      position: relative;
-      transform: translateX(500px);
-      filter: drop-shadow(-500px 0 #999);
-      border-left: 4px solid transparent;
-      border-right: 4px solid transparent;
-    }
 
-    .text {
-      line-height: 15px;
-      min-width: 25px;
-    }
+  .interact-wrap {
+    float: right;
+    margin: 0 10px;
+  }
 
-    .interact-wrap {
-      cursor: pointer;
-    }
+  .icon {
+    overflow: hidden;
+    position: relative;
+    transform: translateX(500px);
+    filter: drop-shadow(-500px 0 #999);
+    border-left: 4px solid transparent;
+    border-right: 4px solid transparent;
+  }
 
-    .active img {
-      filter: drop-shadow(-500px 0 #4ebaee);
-    }
 
-    .active {
-      color: #4ebaee;
-    }
 
-    .interact-wrap:hover img {
-      filter: drop-shadow(-500px 0 #4ebaee);
-    }
+  .interact-wrap {
+    cursor: pointer;
+  }
 
-    .interact-wrap:hover {
-      color: #4ebaee;
-    }
+  .active img {
+    filter: drop-shadow(-500px 0 #4ebaee);
+  }
+
+  .active {
+    color: #4ebaee;
+  }
+
+  .interact-wrap:hover img {
+    filter: drop-shadow(-500px 0 #4ebaee);
+  }
+
+  .interact-wrap:hover {
+    color: #4ebaee;
   }
 </style>
