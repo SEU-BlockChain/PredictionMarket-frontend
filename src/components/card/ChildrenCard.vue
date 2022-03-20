@@ -2,7 +2,10 @@
   <div class="children-comment-wrap" :class="{'new':children_comment.new}">
     <div class="clear-fix">
       <img class="children-comment-avatar" :src="this.$settings.cos_url+children_comment.author.icon"/>
-      <div class="children-comment-author">{{children_comment.author.username}}</div>
+      <div class="children-comment-author">
+        <var-chip v-if="author_id===children_comment.author.id" type="info" size="mini">楼主</var-chip>
+        {{children_comment.author.username}}
+      </div>
       <div class="children-comment-time">{{this.$settings.filters.date(children_comment.comment_time)}}</div>
     </div>
     <div class="children-comment-content limited-xy2" v-html="children_comment.content"
@@ -22,6 +25,7 @@
       InteractBar
     },
     props: {
+      author_id: null,
       root_comment: null,
       children_comment: null,
     },
@@ -77,7 +81,6 @@
     margin: 5px 0;
     cursor: pointer;
   }
-
 
 
   .new {

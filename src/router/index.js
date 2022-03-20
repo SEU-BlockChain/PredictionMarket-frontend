@@ -16,6 +16,7 @@ const routes = [
       },
       {
         path: "/bbs",
+        name: "bbs",
         meta: {
           title: "论坛",
           keepAlive: true

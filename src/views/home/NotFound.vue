@@ -4,7 +4,7 @@
                :src=" this.$settings.cos_url+'static/404.png'"/>
     <div id="text">页面不见了...</div>
     <div id="link">
-      <router-link replace="true" to="/home">返回首页</router-link>
+      <router-link replace="true" to="/">返回首页</router-link>
     </div>
   </div>
 </template>

@@ -245,7 +245,7 @@
     }
 
     #option {
-      width: 45%;
+      width: 50%;
       float: left;
     }
 
@@ -268,7 +268,7 @@
       height: 32px;
       margin: 16px 0;
       padding: 0 5px;
-      width: 15%;
+      width: 20%;
       border-radius: 10px;
       --input-placeholder-size: 10px;
       background-color: rgba(255, 255, 255, .52);

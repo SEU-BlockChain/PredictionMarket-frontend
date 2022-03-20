@@ -6,7 +6,7 @@
       <var-chip id="level" :round="false" type="warning" size="mini">
         Lv.{{this.$settings.rank(article.author.experience).level}}
       </var-chip>
-      <div id="time">{{this.$settings.filters.date(article.create_time)}}</div>
+      <div id="time">{{this.$settings.filters.date(article.update_time)}}</div>
     </div>
 
     <div id="title" @click="this.$router.push(`/bbs/article/${article.id}`)">

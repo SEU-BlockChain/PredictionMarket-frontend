@@ -6,7 +6,10 @@
     </div>
     <div class="comment-right">
       <div class="clear-fix">
-        <div class="author">{{comment.author.username}}</div>
+        <div class="author">
+          <var-chip v-if="author_id===comment.author.id" type="info" size="mini">楼主</var-chip>
+          {{comment.author.username}}
+        </div>
         <var-chip class="level" :round="false" type="warning" size="mini">
           Lv.{{this.$settings.rank(comment.author.experience).level}}
         </var-chip>
@@ -22,7 +25,10 @@
              :class="{'new':children_comment.new}">
           <div class="clear-fix">
             <img class="children-comment-avatar" :src="this.$settings.cos_url+children_comment.author.icon"/>
-            <div class="children-comment-author">{{children_comment.author.username}}</div>
+            <div class="children-comment-author">
+              <var-chip v-if="author_id===children_comment.author.id" type="info" size="mini">楼主</var-chip>
+              {{children_comment.author.username}}
+            </div>
             <div class="children-comment-time">{{this.$settings.filters.date(children_comment.comment_time)}}</div>
           </div>
           <div class="children-comment-content limited-xy2" v-html="children_comment.content"
@@ -36,7 +42,7 @@
       </div>
     </div>
   </div>
-  <var-divider inset="45" style="border-top: 1px solid #f1f1f1" />
+  <var-divider inset="45" style="border-top: 1px solid #f1f1f1"/>
 </template>
 
 <script>
@@ -48,6 +54,7 @@
       InteractBar
     },
     props: {
+      author_id: null,
       comment: null,
       sketch: false,
     },
@@ -77,6 +84,7 @@
       float: left;
       width: 90%;
     }
+
     .comment-wrap {
       padding: 30px 6%;
     }
@@ -105,6 +113,7 @@
       float: left;
       width: calc(100% - 50px);
     }
+
     .comment-wrap {
       padding: 5px;
     }
@@ -125,7 +134,6 @@
   .new {
     background-color: #f5f5dc;
   }
-
 
 
   .author {

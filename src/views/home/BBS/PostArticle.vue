@@ -243,7 +243,6 @@
       margin: 10px;
     }
 
-
     #title-text, #content-text {
       display: none;
     }
@@ -256,6 +255,6 @@
 
   #post, #save, #back {
     float: right;
-    margin:0 20px 20px 0;
+    margin: 0 20px 20px 0;
   }
 </style>

@@ -3,8 +3,21 @@
     <div id="left">
       <var-card id="content-card" class="card" elevation="0">
         <template #extra>
+          <div id="pe-author" class="clear-fix">
+            <img id="pe-avatar" :src="this.$settings.cos_url+article.author.icon"/>
+
+            <div id="pe-name">{{article.author.username}}</div>
+            <div>
+              <var-chip id="pe-level" :round="false" type="warning" size="mini">
+                Lv.{{this.$settings.rank(article.author.experience).level}}
+              </var-chip>
+            </div>
+          </div>
           <div id="title">{{article.title}}</div>
-          <div id="show"></div>
+          <div id="show" class="clear-fix">
+            <div class="left">类别:{{article.category.category}}</div>
+            <div class="right">浏览量:{{article.view_num}}</div>
+          </div>
           <div id="time">文章发表:{{this.$settings.filters.date(article.create_time)}}</div>
           <div id="content" class="limited-xy2" v-html="article.content"/>
         </template>
@@ -40,8 +53,8 @@
         <template #extra>
           <var-tabs v-model:active="author">
             <div class="space"/>
-            <var-tab>全部评论</var-tab>
-            <var-tab>只看楼主</var-tab>
+            <var-tab @click="change_author(false)">全部评论</var-tab>
+            <var-tab @click="change_author(true)">只看楼主</var-tab>
             <div id="order"></div>
             <div class="space"/>
           </var-tabs>
@@ -52,7 +65,7 @@
             @load="load_comments"
           >
             <div :key="comment.id" v-for="comment in comment_list">
-              <comment-card :comment="comment" @show_editor="show_editor"
+              <comment-card :author_id="article.author.id" :comment="comment" @show_editor="show_editor"
                             @show_children_comments="show_children_comments"
               />
             </div>
@@ -83,7 +96,19 @@
             {{article.author.username}}的其它文章
           </div>
           <var-divider margin="0"/>
-          <div style="height: 200px"></div>
+          <div style="min-height: 50px">
+            <div v-if="recommend.length">
+              <div v-for="r in recommend">
+                <div class="recommend-text" @click="open(r.id)">
+                  {{r.title}}
+                </div>
+                <var-divider margin="0" style="border-top: 1px solid whitesmoke;"/>
+              </div>
+            </div>
+            <div style="line-height: 50px;text-align: center;font-size: 14px;color: #333" v-else>
+              还没有文章
+            </div>
+          </div>
         </template>
       </var-card>
 
@@ -144,7 +169,7 @@
 
   <var-popup v-model:show="show_children" style="border-radius: 10px;">
     <div class="clear-fix" id="children-wrap">
-      <comment-card :comment="opened_comment" :sketch="true" @show_editor="show_editor"/>
+      <comment-card :author_id="article.author.id" :comment="opened_comment" :sketch="true" @show_editor="show_editor"/>
       <var-list
         :finished="children_finished"
         v-model:loading="children_loading"
@@ -152,6 +177,7 @@
       >
         <div v-for="children_comment in comment_children_list">
           <children-card
+            :author_id="article.author.id"
             :children_comment="children_comment"
             @show_editor="show_editor"
             :root_comment="opened_comment"/>
@@ -259,11 +285,7 @@
                   let url = "https://bc-1304907527.cos.ap-nanjing.myqcloud.com/" + result.result.data
                   insertFn(url)
                 } else {
-                  this.$tip({
-                    content: result.msg,
-                    type: "warning",
-                    duration: 1000,
-                  })
+                  alert(result.msg)
                 }
               },
             }
@@ -281,12 +303,17 @@
         children_loading: false,
         comment_children_list: [],
         children_next: null,
+
+        recommend: [],
+
+        query: {}
       }
     },
     methods: {
       load_comments() {
+        let query = Object.keys(this.query).map(x => x + "=" + this.query[x]).join("&")
         this.$ajax.api.get(
-          this.next || `bbs/article/${this.$route.params.id}/comment`
+          this.next || `bbs/article/${this.$route.params.id}/comment/?${query}`
         ).then(res => {
           if (res.data.code !== 117) {
             this.$tip({
@@ -446,6 +473,23 @@
             this.children_loading = false
           }
         })
+      },
+      open(id) {
+        window.open(`/bbs/article/${id}`)
+      },
+      clear() {
+        this.comment_list = []
+        this.loading = true
+        this.next = null
+      },
+      change_author(is_author) {
+        if (is_author) {
+          this.query.author = this.article.author.id
+        } else {
+          delete this.query.author
+        }
+        this.clear()
+        this.load_comments()
       }
     },
     beforeCreate() {
@@ -463,6 +507,20 @@
           this.ready = true
         }
       })
+
+      this.$ajax.api.get(
+        `bbs/article/${this.$route.params.id}/recommend/`
+      ).then(res => {
+        if (res.data.code !== 126) {
+          this.$tip({
+            content: res.data.msg,
+            type: "warning",
+            duration: 1000,
+          })
+        } else {
+          this.recommend = res.data.result
+        }
+      })
     },
     created() {
       scrollTo(0, 0)
@@ -478,7 +536,7 @@
 
 <style scoped>
   @media screen and (min-width: 840px) {
-    #pe-tab {
+    #pe-tab, #pe-author {
       display: none;
     }
 
@@ -503,7 +561,7 @@
 
 
     #content-card {
-      padding: 30px 60px;
+      padding: 30px 60px 90px;
     }
 
 
@@ -564,6 +622,18 @@
     .space {
       width: 5%;
     }
+
+    .recommend-text {
+      padding: 10px 20px;
+      font-size: 16px;
+      line-height: 25px;
+      cursor: pointer;
+    }
+
+    .recommend-text:hover {
+      background-color: whitesmoke;
+      color: #4ebaee;
+    }
   }
 
   @media screen and (max-width: 840px) {
@@ -586,7 +656,7 @@
     }
 
     #content-card {
-      padding: 30px 10px;
+      padding: 30px 10px 60px;
     }
 
     #editor-wrap {
@@ -650,6 +720,27 @@
       padding: 10px 10px;
       line-height: 30px;
     }
+
+    #pe-avatar {
+      height: 30px;
+      border-radius: 50%;
+      float: left;
+      margin: 0 10px 0 0;
+    }
+
+    #pe-author{
+      margin: 0px 0 10px;
+    }
+    #pe-name {
+      line-height: 30px;
+      font-size: 15px;
+      color: #666666;
+      float: left;
+    }
+
+    #pe-level{
+      margin: 7px 0;
+    }
   }
 
 
@@ -661,6 +752,7 @@
   #title {
     font-size: 20px;
     font-weight: bold;
+    line-height: 40px;
   }
 
   #show {
@@ -668,6 +760,10 @@
     border-radius: 2px;
     width: 100%;
     height: 30px;
+    line-height: 30px;
+    font-size: 14px;
+    color: #666;
+    padding: 0 30px;
     margin: 20px 0 0;
   }
 
@@ -720,7 +816,8 @@
     font-size: 14px;
     line-height: 30px;
     text-indent: 10px;
-    color: #666666;
+    color: #f6f6f6;
+    background-color: #4ebaee;
   }
 
 

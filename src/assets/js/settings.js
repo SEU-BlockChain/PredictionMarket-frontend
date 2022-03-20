@@ -1,6 +1,6 @@
 let cos_url = "https://bc-1304907527.cos.ap-nanjing.myqcloud.com/"
-let api_url = "https://api.chain.seutools.com/"
-// let api_url = "http://127.0.0.1:8000/"
+// let api_url = "https://api.chain.seutools.com/"
+let api_url = "http://127.0.0.1:8000/"
 
 
 let re_pattens = {
@@ -123,6 +123,23 @@ let filters = {
   }
 }
 
+let bbs_category = [
+  {
+    index: 0,
+    id: 0,
+    category: "全部"
+  },
+  {
+    index: 1,
+    id: 1,
+    category: "分类1"
+  },
+  {
+    index: 2,
+    id: 2,
+    category: "分类2"
+  },
+]
 
 let upAndDown = function (is_up, obj) {
   if (!is_up) {
@@ -168,5 +185,6 @@ export default {
   rank,
   DateParser,
   filters,
-  upAndDown
+  upAndDown,
+  bbs_category
 }
