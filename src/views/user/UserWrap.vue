@@ -22,8 +22,6 @@
 
 <style scoped>
   @media screen and (min-width: 840px) {
-
-
     #content {
       width: 56%;
       margin: 0 auto;

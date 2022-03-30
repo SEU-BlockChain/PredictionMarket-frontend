@@ -35,6 +35,18 @@
         })
       }
     },
+    created() {
+      this.$store.commit("get_web3", [this.$eth.web3, 3])
+      this.$eth.getWeb3().then(res => {
+        this.$store.commit("get_web3", res)
+        if(res[1]===1){
+          res[0].eth.getAccounts().then(accounts=>{
+            this.$store.commit("change_account",accounts[0])
+          })
+          window.ethereum.on("accountsChanged",res=>this.$store.commit("change_account", res[0]))
+        }
+      })
+    }
   }
 </script>
 

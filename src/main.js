@@ -3,6 +3,8 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import settings from "./assets/js/settings";
+import eth from "./assets/js/eth";
+import abi from "./assets/js/abi";
 import cookies from 'vue-cookies'
 import ajax from "assets/js/ajax";
 import Snackbar from "@varlet/ui/es/snackbar";
@@ -13,6 +15,8 @@ import '@varlet/touch-emulator'
 
 const app = createApp(App)
 
+app.config.globalProperties.$eth = eth
+app.config.globalProperties.$abi = abi
 app.config.globalProperties.$settings = settings
 app.config.globalProperties.$cookies = cookies
 app.config.globalProperties.$ajax = ajax

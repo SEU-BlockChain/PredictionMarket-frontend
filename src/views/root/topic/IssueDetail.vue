@@ -1,12 +1,10 @@
 <template>
-  123
+  {{this.$route.params.address}}
 </template>
 
 <script>
-
   export default {
-    name: "HomePage",
-
+    name: "IssueDetail"
   }
 </script>
 

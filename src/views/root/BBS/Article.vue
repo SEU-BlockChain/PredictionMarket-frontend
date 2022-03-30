@@ -212,8 +212,6 @@
       </var-col>
     </var-row>
   </div>
-
-
 </template>
 
 <script>

@@ -1,6 +1,6 @@
 let cos_url = "https://bc-1304907527.cos.ap-nanjing.myqcloud.com/"
-// let api_url = "https://api.chain.seutools.com/"
-let api_url = "http://127.0.0.1:8000/"
+let api_url = "https://api.chain.seutools.com/"
+// let api_url = "http://127.0.0.1:8000/"
 
 
 let re_pattens = {
@@ -96,7 +96,7 @@ class DateParser {
 
   //10-21
   month_day() {
-    return this.month() + "-" + this.day()
+    return this.month().toString().padStart(2, "0") + "-" + this.day().toString().padStart(2, "0")
   }
 
   //10-21 16:25
@@ -106,7 +106,7 @@ class DateParser {
 
   //2021-10-21
   year_month_day() {
-    return this.day() + "-" + this.month_day()
+    return this.year() + "-" + this.month_day()
   }
 }
 

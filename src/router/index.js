@@ -1,11 +1,11 @@
 import {createRouter, createWebHistory} from 'vue-router'
-import HomeWrap from "views/home/HomeWrap";
-import HomePage from "views/home/HomePage";
+import RootWrap from "views/root/RootWrap";
+import HomePage from "views/root/home/HomePage";
 
 const routes = [
   {
     path: "",
-    component: HomeWrap,
+    component: RootWrap,
     children: [
       {
         path: "",
@@ -21,7 +21,7 @@ const routes = [
           title: "论坛",
           keepAlive: true
         },
-        component: () => import("views/home/BBS"),
+        component: () => import("views/root/BBS/BBS"),
       },
       {
         path: "/bbs/post-article",
@@ -29,22 +29,46 @@ const routes = [
           title: "发布帖子",
           auth: true,
         },
-        component: () => import("views/home/BBS/PostArticle"),
+        component: () => import("views/root/BBS/PostArticle"),
       },
       {
         path: "/bbs/article/:id",
         meta: {
           title: "帖子详情",
         },
-        component: () => import("views/home/BBS/Article"),
+        component: () => import("views/root/BBS/Article"),
       },
       {
         path: "/404",
         meta: {
           title: "页面不见了",
         },
-        component: () => import("views/home/NotFound")
-      }
+        component: () => import("views/root/other/NotFound")
+      },
+      {
+        path: "/topic",
+        name: "topic",
+        meta: {
+          title: "全部话题",
+        },
+        component: () => import("views/root/topic/AllTopic"),
+      },
+      {
+        path: "/topic-detail/:id",
+        name: "topic-detail",
+        meta: {
+          title: "话题详情",
+        },
+        component: () => import("views/root/topic/TopicDetail"),
+      },
+      {
+        path: "/issue/:address",
+        name: "issue",
+        meta: {
+          title: "预测详情",
+        },
+        component: () => import("views/root/topic/IssueDetail"),
+      },
     ]
   },
 
@@ -93,20 +117,19 @@ const routes = [
           },
         ]
       },
-
       {
         path: "/user/login",
         meta: {
           title: "登录",
         },
-        component: () => import("views/user/Login"),
+        component: () => import("views/user/sign/Login"),
       },
       {
         path: "/user/reset-password",
         meta: {
           title: "重置密码",
         },
-        component: () => import("views/user/ResetPassword"),
+        component: () => import("views/user/sign/ResetPassword"),
       },
       {
         path: "/user/change-password",
@@ -114,7 +137,7 @@ const routes = [
           title: "修改密码",
           auth: true
         },
-        component: () => import("views/user/ChangePassword"),
+        component: () => import("views/user/sign/ChangePassword"),
       },
     ]
   },

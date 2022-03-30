@@ -3,9 +3,9 @@
   <div id="content">
     <router-view v-slot="{ Component }">
       <keep-alive>
-        <component :is="Component"  v-if="$route.meta.keepAlive"/>
+        <component :is="Component"  v-if="this.$route.meta.keepAlive"/>
       </keep-alive>
-      <component :is="Component"  v-if="!$route.meta.keepAlive"/>
+      <component :is="Component"  v-if="!this.$route.meta.keepAlive"/>
     </router-view>
   </div>
 </template>
@@ -14,7 +14,7 @@
   import HomeNavBar from "components/bar/HomeNavBar";
 
   export default {
-    name: "HomeWrap",
+    name: "RootWrap",
     components: {
       HomeNavBar
     }

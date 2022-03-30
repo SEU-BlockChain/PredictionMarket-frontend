@@ -21,7 +21,7 @@
           active-color="#4ebaee"
           indicator-color="#4ebaee">
           <var-tab class="tab" :class="{'tab-active':active===0}" @click="this.$router.replace('/')">首页</var-tab>
-          <var-tab class="tab" :class="{'tab-active':active===1}">话题</var-tab>
+          <var-tab class="tab" :class="{'tab-active':active===1}" @click="this.$router.replace('/topic')">话题</var-tab>
           <var-tab class="tab" :class="{'tab-active':active===2}" @click="this.$router.replace('/bbs')">论坛
           </var-tab>
           <var-tab class="tab" :class="{'tab-active':active===3}">数据</var-tab>
@@ -100,7 +100,7 @@
       indicator-color="#4ebaee"
       style="border-radius: 0">
       <var-tab class="tab" :class="{'tab-active':active===0}" @click="this.$router.replace('/')">首页</var-tab>
-      <var-tab class="tab" :class="{'tab-active':active===1}">话题</var-tab>
+      <var-tab class="tab" :class="{'tab-active':active===1}" @click="this.$router.replace('/topic')">话题</var-tab>
       <var-tab class="tab" :class="{'tab-active':active===2}" @click="this.$router.replace('/bbs')">论坛</var-tab>
       <var-tab class="tab" :class="{'tab-active':active===3}">数据</var-tab>
       <var-tab class="tab" :class="{'tab-active':active===4}">关于</var-tab>
@@ -127,6 +127,10 @@
         value: "",
         active: 0,
         data: [
+          {
+            path: "/topic",
+            active: 1
+          },
           {
             path: "/bbs",
             active: 2
@@ -238,7 +242,7 @@
     #name {
       font-size: 16px;
       float: left;
-      margin: 0 5% 0 1%;
+      width: 100px;
       font-weight: bold;
       color: #333;
       cursor: pointer;
@@ -268,7 +272,7 @@
       height: 32px;
       margin: 16px 0;
       padding: 0 5px;
-      width: 20%;
+      width: 160px;
       border-radius: 10px;
       --input-placeholder-size: 10px;
       background-color: rgba(255, 255, 255, .52);
