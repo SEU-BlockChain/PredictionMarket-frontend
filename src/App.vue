@@ -39,12 +39,30 @@
       this.$store.commit("get_web3", [this.$eth.web3, 3])
       this.$eth.getWeb3().then(res => {
         this.$store.commit("get_web3", res)
-        if(res[1]===1){
-          res[0].eth.getAccounts().then(accounts=>{
-            this.$store.commit("change_account",accounts[0])
+        if (res[1] === 1) {
+          res[0].eth.getAccounts().then(accounts => {
+            this.$store.commit("change_account", accounts[0])
           })
-          window.ethereum.on("accountsChanged",res=>this.$store.commit("change_account", res[0]))
+          window.ethereum.on("accountsChanged", res => this.$store.commit("change_account", res[0]))
+          this.$tip({
+            content: "已连接到钱包",
+            type: "success",
+            duration: 3000
+          })
+        } else {
+          this.$tip({
+            content: "未检测到钱包，正在以只读模式浏览",
+            type: "warning",
+            duration: 3000
+          })
         }
+      }).catch(reason => {
+        console.log(reason);
+        this.$tip({
+          content: "正在以只读模式浏览",
+          type: "warning",
+          duration: 3000
+        })
       })
     }
   }

@@ -117,6 +117,7 @@
         icon: "",
         start: "",
         end: "",
+        timestamp: "",
         a: "",
         b: "",
       }
@@ -187,10 +188,10 @@
           for (let i of res.predictions) {
             let BP_contract = new this.$store.state.web3.eth.Contract(this.$abi.binaryPrediction, i)
             BP_contract.methods.getInfo().call().then(res => {
-              console.log(res);
               this.issues.push({
                 address: i,
-                data: res
+                data: res,
+                state:this.$settings.state(res[0][0],res[0][1],this.timestamp)
               });
             })
           }
@@ -202,7 +203,10 @@
         this.$abi.predictionMarket,
         this.$eth.address.predictionMarket
       )
-      this.reload_issue()
+      this.$store.state.web3.eth.getBlock("latest").then(res => {
+        this.timestamp = res.timestamp
+        this.reload_issue()
+      })
     }
   }
 </script>
@@ -268,4 +272,5 @@
   .content {
     width: 200px;
   }
+
 </style>

@@ -108,6 +108,10 @@ class DateParser {
   year_month_day() {
     return this.year() + "-" + this.month_day()
   }
+
+  all() {
+    return this.year_month_day() + " " + this.hours_minutes()
+  }
 }
 
 let filters = {
@@ -173,6 +177,18 @@ let upAndDown = function (is_up, obj) {
   }
 }
 
+let state = function (start, end, timestamp) {
+  start = Number(start)
+  end = Number(end)
+  timestamp = Number(timestamp)
+  if (timestamp < start) return 0;
+  if (start < timestamp && timestamp < end) return 1;
+  if (end < timestamp) return 2;
+}
+
+let simpleAddress = function (address) {
+  return address.substr(0, 6) + "..." + address.substr(38);
+}
 export {
   api_url
 }
@@ -186,5 +202,7 @@ export default {
   DateParser,
   filters,
   upAndDown,
-  bbs_category
+  bbs_category,
+  state,
+  simpleAddress
 }

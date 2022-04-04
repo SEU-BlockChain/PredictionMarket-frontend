@@ -1,8 +1,10 @@
 <template>
-  <div class="issue-wrap" style="position: relative" @click="this.$router.push(`/issue/${issue.address}`)">
+  <div class="issue-wrap" style="position: relative" :class="['w-state1','w-state2','w-state3'][issue.state]"
+       @click="this.$router.push(`/issue/${issue.address}`)">
     <div class="clear-fix">
       <img class="left icon" :src="this.$settings.cos_url+issue.data[0][3]">
       <div class="left issue-text">{{issue.data[0][2]}}</div>
+      <div class="right" :class="['state1','state2','state3'][issue.state]">{{["未开始","进行中","已结束"][issue.state]}}</div>
     </div>
     <div class="clear-fix" style="margin: 10px 0;">
       <div class="left issue-time" style="margin-right: 20px">开始时间:{{date(issue.data[0][0]*1000)}}</div>
@@ -12,28 +14,30 @@
       <var-row>
         <var-col :span="6">
           <div class="issue-desc-head">体量</div>
-          <div class="issue-desc">{{issue.data[2]}}</div>
+          <div class="issue-desc">{{issue.data[4]}}</div>
         </var-col>
         <var-col :span="6">
           <div class="issue-desc-head">流动池</div>
-          <div class="issue-desc">{{issue.data[3]}}</div>
+          <div class="issue-desc">{{issue.data[5]}}</div>
         </var-col>
         <var-col :span="6">
           <div class="issue-desc-head">{{issue.data[1][0][1]}}</div>
           <div class="issue-option">
-            <var-chip :round="false" type="default" size="small">{{Number(issue.data[1][0][0])/Number(issue.data[2])}}
+            <var-chip :round="false" type="default" size="small">
+              {{(Number(issue.data[1][0][0])/Number(issue.data[4])).toFixed(3)}}
             </var-chip>
           </div>
         </var-col>
         <var-col :span="6">
           <div class="issue-desc-head">{{issue.data[1][1][1]}}</div>
           <div class="issue-option">
-            <var-chip :round="false" type="default" size="small">{{Number(issue.data[1][1][0])/Number(issue.data[2])}}
+            <var-chip :round="false" type="default" size="small">
+              {{(Number(issue.data[1][1][0])/Number(issue.data[4])).toFixed(3)}}
             </var-chip>
           </div>
         </var-col>
       </var-row>
-      <div class="issue-address">{{issue.address}}</div>
+      <div class="issue-address">地址:{{this.$settings.simpleAddress(issue.address)}}</div>
     </div>
   </div>
 </template>
@@ -42,7 +46,7 @@
   export default {
     name: "IssueCard",
     props: {
-      issue: null
+      issue: null,
     },
     methods: {
       date(timestamp) {
@@ -59,11 +63,22 @@
     width: 31.33%;
     margin: 1%;
     height: 170px;
-    border: 2px solid #42c772;
     background-color: white;
     border-radius: 5px;
     padding: 10px;
     cursor: pointer;
+  }
+
+  .w-state1 {
+    border: 2px solid #888888;
+  }
+
+  .w-state2 {
+    border: 2px solid #42c772;
+  }
+
+  .w-state3 {
+    border: 2px solid #ef1016;
   }
 
   .issue-wrap:hover {
@@ -75,7 +90,7 @@
     line-height: 35px;
   }
 
-  .icon{
+  .icon {
     width: 35px;
     height: 35px;
     border-radius: 50%;
@@ -97,10 +112,8 @@
 
   .issue-address {
     font-size: 10px;
-    overflow-x: scroll;
-    overflow-y: hidden;
     color: #999999;
-    margin-top: 10px;
+    margin: 5px 10px;
   }
 
   .issue-desc-head {
@@ -123,5 +136,26 @@
     line-height: 30px;
   }
 
+  .state1, .state2, .state3 {
+    font-size: 14px;
+    line-height: 15px;
+    padding: 5px;
+    margin: 5px;
+    height: 25px;
+    border-radius: 2px;
+    font-weight: bold;
+    color: #f6f6f6;
+  }
 
+  .state1 {
+    background-color: #888888;
+  }
+
+  .state2 {
+    background-color: #05b16a;
+  }
+
+  .state3 {
+    background-color: #ef1016;
+  }
 </style>

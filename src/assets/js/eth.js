@@ -8,7 +8,7 @@ const getWeb3 = () => new Promise((resolve, reject) => {
     try {
       window.ethereum.enable().then(res => {
         resolve([web3, 1]);
-      });
+      }).catch(reason => reject(reason));
     } catch (error) {
       reject(error);
     }
@@ -21,7 +21,7 @@ const getWeb3 = () => new Promise((resolve, reject) => {
 });
 
 const address = {
-  predictionMarket: "0x2A96AbDb39Be50D27f1B4F85d35Eb5c9e3fe727B"
+  predictionMarket: "0x9c8dc95BB304B25C07575B582D5De6990c49f3d2"
 }
 export default {
   web3,

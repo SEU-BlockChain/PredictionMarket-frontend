@@ -132,6 +132,10 @@
             active: 1
           },
           {
+            path: "/issue",
+            active: 1
+          },
+          {
             path: "/bbs",
             active: 2
           }
@@ -163,33 +167,33 @@
 </script>
 
 <style scoped>
-  @media screen and (min-width: 1250px) {
+  @media screen and (min-width: 1500px) {
     #left {
       width: calc(20% - 1px);
     }
 
     #center {
       width: 60%;
-      min-width: 750px;
+      min-width: 900px;
       text-align: center;
     }
 
 
   }
 
-  @media screen and (max-width: 1250px) and (min-width: 930px) {
+  @media screen and (max-width: 1500px) and (min-width: 1100px) {
     #left {
-      width: calc(50% - 376px);
+      width: calc(50% - 451px);
     }
 
     #center {
-      width: 750px;;
+      width: 900px;;
       text-align: center;
     }
 
   }
 
-  @media screen and (max-width: 930px) and (min-width: 840px) {
+  @media screen and (max-width: 1100px) and (min-width: 840px) {
     #left {
       width: calc(50% - 326px);
     }
