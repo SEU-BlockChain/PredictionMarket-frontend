@@ -1,6 +1,6 @@
 let cos_url = "https://bc-1304907527.cos.ap-nanjing.myqcloud.com/"
-let api_url = "https://api.chain.seutools.com/"
-// let api_url = "http://127.0.0.1:8000/"
+// let api_url = "https://api.chain.seutools.com/"
+let api_url = "http://127.0.0.1:8000/"
 
 
 let re_pattens = {
@@ -189,6 +189,26 @@ let state = function (start, end, timestamp) {
 let simpleAddress = function (address) {
   return address.substr(0, 6) + "..." + address.substr(38);
 }
+
+function scrollAnimation(targetY) {
+  const currentY = document.documentElement.scrollTop || document.body.scrollTop
+
+  let needScrollTop = targetY - currentY
+  let _currentY = currentY
+  setTimeout(() => {
+    // 一次调用滑动帧数，每次调用会不一样
+    const dist = Math.ceil(needScrollTop / 10)
+    _currentY += dist
+    window.scrollTo(0, _currentY)
+    // 如果移动幅度小于十个像素，直接移动，否则递归调用，实现动画效果
+    if (needScrollTop > 10 || needScrollTop < -10) {
+      scrollAnimation(targetY)
+    } else {
+      window.scrollTo(0, targetY)
+    }
+  }, 1)
+}
+
 export {
   api_url
 }
@@ -204,5 +224,6 @@ export default {
   upAndDown,
   bbs_category,
   state,
-  simpleAddress
+  simpleAddress,
+  scrollAnimation
 }

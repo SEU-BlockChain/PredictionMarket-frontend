@@ -124,6 +124,60 @@ const routes = [
         },
         component: () => import("views/user/sign/Login"),
       },
+
+      {
+        path: "/user/message",
+        component: () => import("views/user/message/MessageWrap"),
+        children: [
+          {path: "", redirect: "/user/message/reply"},
+
+          {
+            path: "/user/message/reply",
+            meta: {
+              title: "回复我的",
+              auth: true
+            },
+            component: () => import("views/user/message/Reply"),
+          },
+
+          {
+            path: "/user/message/at",
+            meta: {
+              title: "@我的",
+              auth: true
+            },
+            component: () => import("views/user/message/At"),
+          },
+
+          {
+            path: "/user/message/like",
+            meta: {
+              title: "收到的赞",
+              auth: true
+            },
+            component: () => import("views/user/message/Like"),
+          },
+
+          {
+            path: "/user/message/system",
+            meta: {
+              title: "系统消息",
+              auth: true
+            },
+            component: () => import("views/user/message/System"),
+          },
+
+          {
+            path: "/user/message/private",
+            meta: {
+              title: "我的私信",
+              auth: true
+            },
+            component: () => import("views/user/message/Private"),
+          },
+        ]
+      },
+
       {
         path: "/user/reset-password",
         meta: {
@@ -131,6 +185,7 @@ const routes = [
         },
         component: () => import("views/user/sign/ResetPassword"),
       },
+
       {
         path: "/user/change-password",
         meta: {

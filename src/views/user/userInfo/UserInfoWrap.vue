@@ -1,6 +1,4 @@
 <template>
-
-
   <div id="pe-nav-bar">
     <var-app-bar
       title="用户信息"
@@ -243,6 +241,7 @@
       display: none;
     }
 
+
     #up-wrap {
       padding-top: 40px;
     }
@@ -326,6 +325,7 @@
   }
 
   @media screen and (max-width: 840px) {
+
     #left-wrap, #right-wrap, #account {
       display: none;
     }

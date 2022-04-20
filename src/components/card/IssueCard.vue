@@ -58,15 +58,28 @@
 </script>
 
 <style scoped>
-  .issue-wrap {
-    float: left;
-    width: 31.33%;
-    margin: 1%;
-    height: 170px;
-    background-color: white;
-    border-radius: 5px;
-    padding: 10px;
-    cursor: pointer;
+  @media screen and (min-width: 840px) {
+    .issue-wrap {
+      float: left;
+      width: 31.33%;
+      margin: 1%;
+      height: 170px;
+      background-color: white;
+      border-radius: 5px;
+      padding: 10px;
+      cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 840px) {
+    .issue-wrap {
+      width: 94%;
+      margin: 3%;
+      height: 170px;
+      background-color: white;
+      border-radius: 5px;
+      padding: 10px;
+    }
   }
 
   .w-state1 {

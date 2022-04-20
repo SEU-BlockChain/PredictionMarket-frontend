@@ -167,39 +167,71 @@
 </script>
 
 <style scoped>
+  @media screen and (min-width: 840px) {
+    #head {
+      margin-top: 20px;
+      background-color: #ccc;
+      width: 100%;
+      height: 150px;
+    }
+
+    #all-left {
+      float: left;
+      width: 68%;
+      margin-right: 2%;
+    }
+
+    #all-right {
+      float: left;
+      width: 30%;
+    }
+
+    #search {
+      margin: 20px 0;
+      padding: 3px 5px;
+      border-radius: 5px;
+      font-size: 16px;
+      --input-placeholder-size: 10px;
+      background-color: #fafafa;
+      cursor: pointer;
+    }
+  }
+
+  @media screen and (max-width: 840px) {
+    #all-left {
+      width: 100vw;
+      padding: 5px;
+    }
+
+    #all-right {
+      display: none;
+    }
+
+    #head {
+      background-color: #ccc;
+      margin: 5px;
+      width: calc(100% - 10px);
+      height: 150px;
+      border-radius: 5px;
+    }
+
+    #search {
+      margin: 5px;
+      padding: 3px 5px;
+      border-radius: 5px;
+      font-size: 16px;
+      --input-placeholder-size: 10px;
+      background-color: #fafafa;
+      cursor: pointer;
+    }
+  }
+
   #topic-article {
     position: fixed;
     right: 40px;
     bottom: 120px;
   }
 
-  #head {
-    margin-top: 20px;
-    background-color: #ccc;
-    width: 100%;
-    height: 150px;
-  }
-
-  #all-left {
-    float: left;
-    width: 68%;
-    margin-right: 2%;
-  }
-
-  #all-right {
-    float: left;
-    width: 30%;
-  }
-
-  #search {
-    margin: 20px 0;
-    padding: 3px 5px;
-    border-radius: 5px;
-    font-size: 16px;
-    --input-placeholder-size: 10px;
-    background-color: #fafafa;
-    cursor: pointer;
-  }
 
   #search-btn {
     padding: 3px;

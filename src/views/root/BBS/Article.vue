@@ -218,8 +218,12 @@
   import '@wangeditor/editor/dist/css/style.css'
   import {Editor, Toolbar, getEditor, removeEditor} from '@wangeditor/editor-for-vue'
   import {SlateTransforms} from '@wangeditor/editor'
+  import {Boot} from '@wangeditor/editor'
+  import mentionModule from '@wangeditor/plugin-mention'
   import CommentCard from "components/card/CommentCard";
   import ChildrenCard from "components/card/ChildrenCard";
+
+  Boot.registerModule(mentionModule)
 
   export default {
     name: "Article",
@@ -228,6 +232,7 @@
       Editor,
       Toolbar,
       ChildrenCard,
+
     },
     data() {
       return {
@@ -287,12 +292,17 @@
                 }
               },
             }
-          }
+          },
+          EXTEND_CONF: {
+            mentionConfig: {
+            },
+          },
         },
         mode: 'default',
 
         show: false,
         parent_id: null,
+        target_id: null,
 
         show_children: false,
         opened_comment: null,
@@ -351,7 +361,6 @@
             data.new = true
             this.article.comment_num++
             this.comment_list.unshift(data)
-            this.to_comment()
           } else {
             this.$tip({
               content: res.data.msg,
@@ -362,7 +371,9 @@
         })
       },
       to_comment_editor() {
-        scrollTo(0, document.getElementById("comment-input").offsetTop - 64)
+        let target = document.getElementById("comment-input").offsetTop
+        target -= window.screen.width < 840 ? 158 : 108
+        this.$settings.scrollAnimation(target)
       },
       voteArticle(is_up) {
         this.$ajax.api.post(
@@ -398,6 +409,9 @@
               }, {text: ':'}]
             }])
             SlateTransforms.removeNodes(editor, {at: [0]})
+            this.target_id = target.id
+          } else {
+            this.target_id = null
           }
           this.show = true
           this.parent_id = parent.id
@@ -408,12 +422,14 @@
         getEditor("editor2").clear()
       },
       post_children_comment() {
+        console.log(this.target_id);
         let editor = getEditor("editor2")
         if (editor.isEmpty()) return
 
         this.$ajax.api.post(
           `bbs/article/${this.$route.params.id}/comment/${this.parent_id}/children_comment/`,
           {
+            target_id: this.target_id || this.parent_id,
             content: editor.getHtml()
           }
         ).then(res => {
@@ -726,9 +742,10 @@
       margin: 0 10px 0 0;
     }
 
-    #pe-author{
+    #pe-author {
       margin: 0px 0 10px;
     }
+
     #pe-name {
       line-height: 30px;
       font-size: 15px;
@@ -736,7 +753,7 @@
       float: left;
     }
 
-    #pe-level{
+    #pe-level {
       margin: 7px 0;
     }
   }

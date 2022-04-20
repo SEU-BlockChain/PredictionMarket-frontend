@@ -30,7 +30,7 @@
       </div>
 
 
-      <div id="message">
+      <div id="message" @click="this.$router.push('/user/message')">
         <var-badge type="danger" position="right-top" style="line-height: 16px;z-index: 100" :value="0">
           <var-icon name="message-processing-outline" size="26px"/>
         </var-badge>

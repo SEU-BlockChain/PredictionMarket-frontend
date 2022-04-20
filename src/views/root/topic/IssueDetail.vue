@@ -396,10 +396,68 @@
 </script>
 
 <style scoped>
-  #head {
-    margin: 20px 0;
-    padding: 20px;
+  @media screen and (min-width: 840px) {
+    #left {
+      float: left;
+      margin-top: 20px;
+      margin-right: 2%;
+      width: 68%;
+    }
+    #head {
+      margin: 20px 0;
+      padding: 20px;
+    }
+    #right {
+      float: left;
+      margin-top: 20px;
+      width: 30%;
+    }
+
+    .box-container {
+      align-items: center;
+      display: flex;
+      margin: 1rem;
+      padding: 0;
+    }
+
+    .box {
+      background: #f4f4f4;
+      display: block;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 100px;
+      padding: .5rem 1rem;
+      margin: 0 10px;
+      white-space: nowrap;
+    }
   }
+
+  @media screen and (max-width: 840px) {
+    #left, #right {
+      margin-top: 20px;
+      width: 100%;
+      padding: 5px;
+    }
+    #head {
+      padding: 10px;
+    }
+    .box-container {
+      width: 100%;
+    }
+
+    .box {
+      background: #f4f4f4;
+      display: block;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 29.33%;
+      padding: .5rem 1rem;
+      margin: 0 2%;
+      white-space: nowrap;
+    }
+  }
+
+
 
   #icon {
     width: 50px;
@@ -428,40 +486,10 @@
     color: #999999;
   }
 
-  .box-container {
-    align-items: center;
-    display: flex;
-    margin: 1rem;
-    padding: 0;
-  }
-
-  .box {
-    background: #f4f4f4;
-    display: block;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 100px;
-    padding: .5rem 1rem;
-    margin: 0 10px;
-    white-space: nowrap;
-  }
 
   .box-title {
     font-size: 12px;
     color: #666;
-  }
-
-  #left {
-    float: left;
-    margin-top: 20px;
-    margin-right: 2%;
-    width: 68%;
-  }
-
-  #right {
-    float: left;
-    margin-top: 20px;
-    width: 30%;
   }
 
   .option {
